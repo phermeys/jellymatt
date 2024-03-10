@@ -1,6 +1,10 @@
 # jellymatt
 My own jellyfin container that works for me
 
+Just do a `git clone` into whatever folder you want to run the container from
+
+Modify the volumes as needed for deployment
+
 I originally made my Jellyfin VM from the lscr.io/linuxserver/jellyfin:latest image
 
 It kept crashing out when playing media and then the entire service went wonky
