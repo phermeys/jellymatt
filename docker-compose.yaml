@@ -1,15 +1,19 @@
 version: "3.5"
 services:
   jellyfin:
-    image: jellymatt
+    image: jellyfin-matt
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: jellymatt-test
+    container_name: jellyfin-matt
     environment:
       - TZ=America/Los_Angeles
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
-      - ./config:/opt/jellyfin/config
+      - ./config/data:/var/lib/jellyfin
+      - ./config/config:/etc/jellyfin
+      - ./config/log:/var/log/jellyfin
       - /shares/tv:/shares/tv
       - /shares/movies:/shares/movies
     ports:
