@@ -28,10 +28,13 @@ RUN mkdir /opt/jellyfin/config
 RUN mkdir /opt/jellyfin/config/data /opt/jellyfin/config/cache /opt/jellyfin/config/config /opt/jellyfin/config/log
 
 # ffmpeg install
-RUN wget https://repo.jellyfin.org/releases/server/ubuntu/versions/jellyfin-ffmpeg/5.1.4-2/jellyfin-ffmpeg5_5.1.4-2-jammy_amd64.deb
-RUN gdebi -n jellyfin-ffmpeg5_5.1.4-2-jammy_amd64.deb
-RUN dpkg -i jellyfin-ffmpeg5_5.1.4-2-jammy_amd64.deb
-RUN apt-get install -y libnvidia-encode-535-server
+RUN wget https://sfo1.mirror.jellyfin.org/files/releases/server/ubuntu/versions/jellyfin-ffmpeg/6.0.1-3/jellyfin-ffmpeg6_6.0.1-3-jammy_amd64.deb
+COPY jellyfin-ffmpeg6_6.0.1-3-jammy_amd64.deb ./
+RUN gdebi -n jellyfin-ffmpeg6_6.0.1-3-jammy_amd64.deb
+RUN dpkg -i jellyfin-ffmpeg6_6.0.1-3-jammy_amd64.deb
+RUN apt-get update && \
+    apt-get install -y libnvidia-encode-535-server && \
+    rm -rf /var/lib/apt/lists/*
 
 # Run Jellyfin
 COPY jellyfin.sh /opt/jellyfin
